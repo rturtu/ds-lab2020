@@ -1,0 +1,28 @@
+{
+    "development": {
+        "username": "example_user",
+        "password": "examplesecreta",
+        "database": "example",
+        "host": "127.0.0.1",
+        "dialect": "postgres",
+        "operatorsAliases": false,
+        "logging": false
+    },
+    "test": {
+        "username": "example_user",
+        "password": "examplesecreta",
+        "database": "example_testing",
+        "host": "127.0.0.1",
+        "dialect": "postgres",
+        "operatorsAliases": false,
+        "logging": false
+    },
+    "production": {
+        "username": "example_user",
+        "password": "examplesecreta",
+        "database": "example",
+        "host": "127.0.0.1",
+        "dialect": "postgres",
+        "operatorsAliases": false
+    }
+}

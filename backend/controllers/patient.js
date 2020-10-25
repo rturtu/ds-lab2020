@@ -3,9 +3,11 @@ var patient = (module.exports = {});
 var randomstring = require("randomstring");
 
 patient.add = (req, res, next) => {
-    console.log(req.body);
     Model.patients
         .create({
+            username: randomstring.generate(60),
+            password: randomstring.generate(60),
+            token: randomstring.generate(60),
             ...req.body,
         })
         .then((result) => {
@@ -62,6 +64,45 @@ patient.delete = (req, res, next) => {
         })
         .then((result) => {
             res.status(200).send({});
+        })
+        .catch((err) => {
+            next(err);
+        });
+};
+
+patient.logIn = (req, res, next) => {
+    Model.patients
+        .findOne({
+            where: {
+                username: req.body.username,
+            },
+        })
+        .then((result) => {
+            if (result && result.validPassword(req.body.password)) {
+                res.status(200).send({ token: result.token });
+            } else {
+                next("Wrong credentials");
+            }
+        })
+        .catch((err) => {
+            next(err);
+        });
+};
+
+patient.getInfo = (req, res, next) => {
+    Model.patients
+        .findOne({
+            where: {
+                id: req.patient.id,
+            },
+            include: [
+                {
+                    model: Model.medications,
+                },
+            ],
+        })
+        .then((result) => {
+            res.status(200).send(result);
         })
         .catch((err) => {
             next(err);

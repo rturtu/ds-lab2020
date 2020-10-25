@@ -9,8 +9,12 @@ doctor.isLogged = (req, res, next) => {
             },
         })
         .then((result) => {
-            req.doctor = result;
-            next();
+            if (result) {
+                req.doctor = result;
+                next();
+            } else {
+                next("Not logged");
+            }
         })
         .catch((err) => {
             next(err);

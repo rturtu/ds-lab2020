@@ -59,6 +59,13 @@ const api = {
                 }),
         },
     },
+    patient: {
+        signUp: (payload) =>
+            request(`${url}patient`, { method: "POST", body: payload }),
+        logIn: (payload) =>
+            request(`${url}patient/login`, { method: "POST", body: payload }),
+        getInfo: () => request(`${url}patient`, { method: "GET" }),
+    },
 };
 
 export default api;

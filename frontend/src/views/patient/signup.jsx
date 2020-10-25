@@ -69,7 +69,7 @@ const PatientSignUp = (props) => {
                         handleSetPatient("birthDate", evt.target.value)
                     }
                 />
-                <FormLabel>Gender</FormLabel>
+                <h3>Gender</h3>
                 <Dropdown
                     value={patient.gender}
                     onChange={(evt, data) =>

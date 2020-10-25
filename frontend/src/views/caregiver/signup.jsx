@@ -69,7 +69,7 @@ const CaregiverSignUp = (props) => {
                         handleSetCaregiver("birthDate", evt.target.value)
                     }
                 />
-                <FormLabel>Gender</FormLabel>
+                <h3>Gender</h3>
                 <Dropdown
                     value={caregiver.gender}
                     onChange={(evt, data) =>

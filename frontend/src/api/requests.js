@@ -57,6 +57,16 @@ const api = {
                     method: "PUT",
                     body: payload,
                 }),
+            addPatient: (payload) =>
+                request(`${url}doctor/caregiver/patients`, {
+                    method: "POST",
+                    body: payload,
+                }),
+            deletePatient: (payload) =>
+                request(`${url}doctor/caregiver/patients`, {
+                    method: "DELETE",
+                    body: payload,
+                }),
         },
     },
     patient: {
@@ -65,6 +75,35 @@ const api = {
         logIn: (payload) =>
             request(`${url}patient/login`, { method: "POST", body: payload }),
         getInfo: () => request(`${url}patient`, { method: "GET" }),
+    },
+    caregiver: {
+        signUp: (payload) =>
+            request(`${url}caregiver`, { method: "POST", body: payload }),
+        logIn: (payload) =>
+            request(`${url}caregiver/login`, { method: "POST", body: payload }),
+        patient: {
+            getAll: () =>
+                request(`${url}caregiver/patients`, { method: "GET" }),
+            update: (patientId, payload) =>
+                request(`${url}caregiver/patient/${patientId}`, {
+                    method: "PUT",
+                    body: payload,
+                }),
+            addMedication: (payload) =>
+                request(`${url}caregiver/medication`, {
+                    method: "POST",
+                    body: payload,
+                }),
+            updateMedication: (medicationId, payload) =>
+                request(`${url}caregiver/medication/${medicationId}`, {
+                    method: "PUT",
+                    body: payload,
+                }),
+            deleteMedication: (medicationId) =>
+                request(`${url}caregiver/medication/${medicationId}`, {
+                    method: "DELETE",
+                }),
+        },
     },
 };
 

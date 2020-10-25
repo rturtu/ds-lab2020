@@ -20,7 +20,6 @@ const DoctorLogIn = (props) => {
             })
             .then((res) => {
                 sessionStorage.setItem("authToken", res.token);
-                console.log("gataaa");
                 history.push("/doctor/dashboard");
             })
             .catch((err) => {
@@ -30,14 +29,18 @@ const DoctorLogIn = (props) => {
 
     return (
         <Container>
+            <h1>Doctor LogIn</h1>
             <Form>
+                <h3>Username</h3>
                 <Form.Input
                     placeholder="username"
                     value={username}
                     onChange={(evt) => setUsername(evt.target.value)}
                 />
+                <h3>Password</h3>
                 <Form.Input
                     placeholder="password"
+                    type="password"
                     value={password}
                     onChange={(evt) => setPassword(evt.target.value)}
                 />

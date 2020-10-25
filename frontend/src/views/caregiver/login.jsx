@@ -3,13 +3,13 @@ import { Button, Container, Form } from "semantic-ui-react";
 import api from "../../api/requests";
 import { useHistory } from "react-router-dom";
 
-const PatientLogin = (props) => {
+const CaregiverLogIn = (props) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const history = useHistory();
 
     const handleLogIn = () => {
-        api.patient
+        api.caregiver
             .logIn({
                 username,
                 password,
@@ -20,14 +20,14 @@ const PatientLogin = (props) => {
             })
             .then((res) => {
                 sessionStorage.setItem("authToken", res.token);
-                history.push("/patient/dashboard");
+                history.push("/caregiver/dashboard");
             })
             .catch(console.log);
     };
 
     return (
         <Container>
-            <h1>Patient LogIn</h1>
+            <h1>Caregiver LogIn</h1>
             <Form>
                 <h3>Username</h3>
                 <Form.Input
@@ -48,11 +48,11 @@ const PatientLogin = (props) => {
                         handleLogIn();
                     }}
                 >
-                    Login Patient
+                    Login caregiver
                 </Button>
                 <span
                     onClick={() => {
-                        history.push("/patient/signup");
+                        history.push("/caregiver/signup");
                     }}
                 >
                     Register Here
@@ -62,4 +62,4 @@ const PatientLogin = (props) => {
     );
 };
 
-export default PatientLogin;
+export default CaregiverLogIn;

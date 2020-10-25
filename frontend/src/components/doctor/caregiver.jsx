@@ -19,7 +19,56 @@ const FormLabel = styled.span`
 `;
 
 const EditCaregiver = (props) => {
-    const { caregiver, setCaregiver } = props;
+    const { caregiver, setCaregiver, patients, showPatients } = props;
+
+    const handleChangePatient = (newPatients) => {
+        console.log(newPatients, caregiver);
+        if (newPatients.length > caregiver.patients.length) {
+            const newPatient = newPatients.find(
+                (patient) => !caregiver.patients.find((p) => p === patient)
+            );
+            console.log("new", newPatient);
+            api.doctor.caregiver
+                .addPatient({
+                    caregiverId: caregiver.id,
+                    patientId: newPatient,
+                })
+                .then((response) => {
+                    if (response.status !== 200) throw new Error();
+                    return;
+                })
+                .then((res) => {
+                    setCaregiver("patients", [
+                        ...caregiver.patients,
+                        newPatient,
+                    ]);
+                })
+                .catch(console.log);
+        } else {
+            const removedPatient = caregiver.patients.find(
+                (patient) => !newPatients.find((p) => p === patient)
+            );
+            console.log("delete", removedPatient);
+            api.doctor.caregiver
+                .deletePatient({
+                    caregiverId: caregiver.id,
+                    patientId: removedPatient,
+                })
+                .then((response) => {
+                    if (response.status !== 200) throw new Error();
+                    return;
+                })
+                .then((res) => {
+                    setCaregiver(
+                        "patients",
+                        caregiver.patients.filter(
+                            (patient) => patient !== removedPatient
+                        )
+                    );
+                })
+                .catch(console.log);
+        }
+    };
 
     return (
         <React.Fragment>
@@ -46,6 +95,28 @@ const EditCaregiver = (props) => {
                 value={caregiver.address}
                 onChange={(evt) => setCaregiver("address", evt.target.value)}
             />
+            {showPatients && (
+                <React.Fragment>
+                    <FormLabel>Patients</FormLabel>
+                    <br />
+                    <Dropdown
+                        multiple
+                        selection
+                        value={caregiver.patients}
+                        onChange={(evt, data) => {
+                            handleChangePatient(data.value);
+                        }}
+                        options={patients.map((patient) => {
+                            return {
+                                text: patient.name,
+                                key: patient.id,
+                                value: patient.id,
+                            };
+                        })}
+                    />
+                    <br />
+                </React.Fragment>
+            )}
         </React.Fragment>
     );
 };
@@ -55,6 +126,8 @@ const CaregiverDashboard = (props) => {
     const [editCaregiver, setEditCaregiver] = useState({});
     const [newCaregiver, setNewCaregiver] = useState({});
     const [deleteCaregiver, setDeleteCaregiver] = useState({});
+
+    const [patients, setPatients] = useState([]);
 
     const handleSetEditCaregiver = (key, value) => {
         setEditCaregiver({
@@ -92,7 +165,26 @@ const CaregiverDashboard = (props) => {
                 return response.json();
             })
             .then((res) => {
-                setCaregivers(res);
+                setCaregivers(
+                    res.map((caregiver) => {
+                        return {
+                            ...caregiver,
+                            patients: caregiver.patients.map(
+                                (patient) => patient.id
+                            ),
+                        };
+                    })
+                );
+            })
+            .catch(console.log);
+        api.doctor.patient
+            .getAll()
+            .then((response) => {
+                if (response.status !== 200) throw new Error();
+                return response.json();
+            })
+            .then((res) => {
+                setPatients(res);
             })
             .catch(console.log);
     }, []);
@@ -195,9 +287,12 @@ const CaregiverDashboard = (props) => {
             <Modal open={editCaregiver.id != undefined}>
                 <Modal.Content>
                     <EditCaregiver
+                        showPatients
+                        patients={patients}
                         caregiver={editCaregiver}
                         setCaregiver={handleSetEditCaregiver}
                     />
+                    <Divider />
                     <Button onClick={handleUpdateCaregiver}>
                         Update caregiver
                     </Button>

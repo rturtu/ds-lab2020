@@ -18,3 +18,23 @@ router.post(
     Middleware.doctor.isLogged,
     Controller.medication.add
 );
+
+router.put(
+    "/caregiver/medication/:medicationId",
+    Middleware.caregiver.isLogged,
+    Middleware.caregiver.hasPatient,
+    Controller.medication.update
+);
+
+router.delete(
+    "/caregiver/medication/:medicationId",
+    Middleware.caregiver.isLogged,
+    Middleware.caregiver.hasPatient,
+    Controller.medication.delete
+);
+router.post(
+    "/caregiver/medication",
+    Middleware.caregiver.isLogged,
+    Middleware.caregiver.hasPatient,
+    Controller.medication.add
+);

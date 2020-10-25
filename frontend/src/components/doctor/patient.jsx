@@ -19,7 +19,13 @@ const FormLabel = styled.span`
 `;
 
 const EditPatient = (props) => {
-    const { showMedication, patient, setPatient } = props;
+    const {
+        addMedication,
+        deleteMedication,
+        showMedication,
+        patient,
+        setPatient,
+    } = props;
     const [newMedication, setNewMedication] = useState({});
 
     const getGenders = () => {
@@ -33,21 +39,20 @@ const EditPatient = (props) => {
     };
 
     const handleAddNewMedication = () => {
-        api.doctor.patient
-            .addMedication({ ...newMedication, patientId: patient.id })
+        addMedication({ ...newMedication, patientId: patient.id })
             .then((response) => {
                 if (response.status !== 200) throw new Error();
                 return response.json();
             })
             .then((res) => {
                 setPatient("medications", [...patient.medications, res]);
+                setNewMedication({});
             })
             .catch(console.log);
     };
 
     const handleDeleteMedication = (medicationId) => {
-        api.doctor.patient
-            .deleteMedication(medicationId)
+        deleteMedication(medicationId)
             .then((response) => {
                 if (response.status !== 200) throw new Error();
                 return;
@@ -154,6 +159,14 @@ const PatientDashboard = (props) => {
     const [newPatient, setNewPatient] = useState({});
     const [deletePatient, setDeletePatient] = useState({});
 
+    const {
+        addMedication,
+        deleteMedication,
+        getPatients,
+        updatePatient,
+        showAddNewPatient,
+    } = props;
+
     const handleSetEditPatient = (key, value) => {
         setEditPatient({
             ...editPatient,
@@ -183,8 +196,7 @@ const PatientDashboard = (props) => {
     };
 
     useEffect(() => {
-        api.doctor.patient
-            .getAll()
+        getPatients()
             .then((response) => {
                 if (response.status !== 200) throw new Error();
                 return response.json();
@@ -196,8 +208,7 @@ const PatientDashboard = (props) => {
     }, []);
 
     const handleUpdatePatient = () => {
-        api.doctor.patient
-            .update(editPatient.id, editPatient)
+        updatePatient(editPatient.id, editPatient)
             .then((response) => {
                 if (response.status !== 200) throw new Error();
                 return;
@@ -239,19 +250,23 @@ const PatientDashboard = (props) => {
 
     return (
         <Container>
-            <h2>Add new patient</h2>
-            <EditPatient
-                patient={newPatient}
-                setPatient={handleSetNewPatient}
-            />
-            <Button
-                onClick={() => {
-                    handleAddPatient();
-                }}
-            >
-                Add patient
-            </Button>
-            <Divider />
+            {showAddNewPatient && (
+                <React.Fragment>
+                    <h2>Add new patient</h2>
+                    <EditPatient
+                        patient={newPatient}
+                        setPatient={handleSetNewPatient}
+                    />
+                    <Button
+                        onClick={() => {
+                            handleAddPatient();
+                        }}
+                    >
+                        Add patient
+                    </Button>
+                    <Divider />
+                </React.Fragment>
+            )}
 
             <h2>List of patients</h2>
             <Table>
@@ -298,6 +313,8 @@ const PatientDashboard = (props) => {
                         showMedication
                         patient={editPatient}
                         setPatient={handleSetEditPatient}
+                        addMedication={addMedication}
+                        deleteMedication={deleteMedication}
                     />
                     <Divider />
                     <Button onClick={handleUpdatePatient}>

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import PatientDashboard from "../../components/doctor/patient";
-import CaregiverDashboard from "../../components/doctor/caregiver";
 import { Menu } from "semantic-ui-react";
 import api from "../../api/requests";
 
@@ -10,10 +9,6 @@ const DoctorDashboard = (props) => {
         {
             key: "patients",
             name: "Patients",
-        },
-        {
-            key: "caregivers",
-            name: "Caregivers",
         },
     ];
     return (
@@ -37,14 +32,12 @@ const DoctorDashboard = (props) => {
             />
             {currentTab === "patients" && (
                 <PatientDashboard
-                    getPatients={api.doctor.patient.getAll}
-                    updatePatient={api.doctor.patient.update}
-                    addMedication={api.doctor.patient.addMedication}
-                    deleteMedication={api.doctor.patient.deleteMedication}
-                    showAddNewPatient
+                    getPatients={api.caregiver.patient.getAll}
+                    updatePatient={api.caregiver.patient.update}
+                    addMedication={api.caregiver.patient.addMedication}
+                    deleteMedication={api.caregiver.patient.deleteMedication}
                 />
             )}
-            {currentTab === "caregivers" && <CaregiverDashboard />}
         </React.Fragment>
     );
 };

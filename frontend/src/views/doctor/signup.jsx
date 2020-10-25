@@ -27,14 +27,18 @@ const DoctorLogIn = (props) => {
 
     return (
         <Container>
+            <h1>Doctor SignUp</h1>
             <Form>
+                <h3>Username</h3>
                 <Form.Input
                     placeholder="username"
                     value={username}
                     onChange={(evt) => setUsername(evt.target.value)}
                 />
+                <h3>Password</h3>
                 <Form.Input
                     placeholder="password"
+                    type="password"
                     value={password}
                     onChange={(evt) => setPassword(evt.target.value)}
                 />

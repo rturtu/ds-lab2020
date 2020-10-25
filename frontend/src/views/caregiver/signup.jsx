@@ -7,73 +7,73 @@ import styled from "styled-components";
 
 const FormLabel = styled.span``;
 
-const PatientSignUp = (props) => {
-    const [patient, setPatient] = useState({});
+const CaregiverSignUp = (props) => {
+    const [caregiver, setCaregiver] = useState({});
     const history = useHistory();
 
-    const handleSetPatient = (key, value) => {
-        setPatient({
-            ...patient,
+    const handleSetCaregiver = (key, value) => {
+        setCaregiver({
+            ...caregiver,
             [key]: value,
         });
     };
 
     const handleLogIn = () => {
-        api.patient
-            .signUp(patient)
+        api.caregiver
+            .signUp(caregiver)
             .then((response) => {
                 if (response.status !== 200) throw new Error();
                 return response.json();
             })
             .then((res) => {
                 sessionStorage.setItem("authToken", res.token);
-                history.push("/patient/dashboard");
+                history.push("/caregiver/dashboard");
             })
             .catch((err) => {});
     };
 
     return (
         <Container>
-            <h1>Patient SignUp</h1>
+            <h1>Caregiver SignUp</h1>
             <Form>
                 <h3>Username</h3>
                 <Form.Input
                     placeholder="username"
-                    value={patient.username}
+                    value={caregiver.username}
                     onChange={(evt) =>
-                        handleSetPatient("username", evt.target.value)
+                        handleSetCaregiver("username", evt.target.value)
                     }
                 />
                 <h3>Password</h3>
                 <Form.Input
                     placeholder="password"
-                    value={patient.password}
+                    value={caregiver.password}
                     onChange={(evt) =>
-                        handleSetPatient("password", evt.target.value)
+                        handleSetCaregiver("password", evt.target.value)
                     }
                 />
                 <h3>Name</h3>
                 <Form.Input
                     placeholder="name"
-                    value={patient.name}
+                    value={caregiver.name}
                     onChange={(evt) =>
-                        handleSetPatient("name", evt.target.value)
+                        handleSetCaregiver("name", evt.target.value)
                     }
                 />
                 <h3>Birth date</h3>
                 <Form.Input
                     placeholder="birthDate"
                     type="date"
-                    value={patient.birthDate}
+                    value={caregiver.birthDate}
                     onChange={(evt) =>
-                        handleSetPatient("birthDate", evt.target.value)
+                        handleSetCaregiver("birthDate", evt.target.value)
                     }
                 />
                 <FormLabel>Gender</FormLabel>
                 <Dropdown
-                    value={patient.gender}
+                    value={caregiver.gender}
                     onChange={(evt, data) =>
-                        handleSetPatient("gender", data.value)
+                        handleSetCaregiver("gender", data.value)
                     }
                     options={getGenders()}
                 />
@@ -81,9 +81,9 @@ const PatientSignUp = (props) => {
                 <h3>Address</h3>
                 <Form.Input
                     placeholder="address"
-                    value={patient.address}
+                    value={caregiver.address}
                     onChange={(evt) =>
-                        handleSetPatient("address", evt.target.value)
+                        handleSetCaregiver("address", evt.target.value)
                     }
                 />
                 <Button
@@ -92,11 +92,11 @@ const PatientSignUp = (props) => {
                         handleLogIn();
                     }}
                 >
-                    Register user
+                    Register caregiver
                 </Button>
                 <span
                     onClick={() => {
-                        history.push("/patient/login");
+                        history.push("/caregiver/login");
                     }}
                 >
                     Login here
@@ -106,4 +106,4 @@ const PatientSignUp = (props) => {
     );
 };
 
-export default PatientSignUp;
+export default CaregiverSignUp;

@@ -8,6 +8,13 @@ router.post("/patient/login", Controller.patient.logIn);
 router.get("/patient", Middleware.patient.isLogged, Controller.patient.getInfo);
 
 router.put(
+    "/caregiver/patient/:patientId",
+    Middleware.caregiver.isLogged,
+    Middleware.caregiver.hasPatient,
+    Controller.patient.update
+);
+
+router.put(
     "/doctor/patient/:patientId",
     Middleware.doctor.isLogged,
     Controller.patient.update

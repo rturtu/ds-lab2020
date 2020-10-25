@@ -11,6 +11,10 @@ import PatientSignUp from "./views/patient/signup";
 import PatientLogIn from "./views/patient/login";
 import PatientDashboard from "./views/patient/dashboard";
 
+import CaregiverSignUp from "./views/caregiver/signup";
+import CaregiverLogIn from "./views/caregiver/login";
+import CaregiverDashboard from "./views/caregiver/dashboard";
+
 function App() {
     return (
         <BrowserRouter>
@@ -22,6 +26,13 @@ function App() {
                 <Route path="/patient/login" component={PatientLogIn} />
                 <Route path="/patient/signup" component={PatientSignUp} />
                 <Route path="/patient/dashboard" component={PatientDashboard} />
+
+                <Route path="/caregiver/login" component={CaregiverLogIn} />
+                <Route path="/caregiver/signup" component={CaregiverSignUp} />
+                <Route
+                    path="/caregiver/dashboard"
+                    component={CaregiverDashboard}
+                />
             </Switch>
         </BrowserRouter>
     );

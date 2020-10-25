@@ -35,6 +35,23 @@ patient.getAll = (req, res, next) => {
         });
 };
 
+patient.getFromCaregiver = (req, res, next) => {
+    req.caregiver
+        .getPatients({
+            include: [
+                {
+                    model: Model.medications,
+                },
+            ],
+        })
+        .then((result) => {
+            res.status(200).send(result);
+        })
+        .catch((err) => {
+            next(err);
+        });
+};
+
 patient.update = (req, res, next) => {
     Model.patients
         .update(
@@ -79,7 +96,8 @@ patient.logIn = (req, res, next) => {
         })
         .then((result) => {
             if (result && result.validPassword(req.body.password)) {
-                res.status(200).send({ token: result.token });
+                const token = result.generateToken();
+                res.status(200).send({ token });
             } else {
                 next("Wrong credentials");
             }

@@ -6,20 +6,24 @@
         "host": "127.0.0.1",
         "dialect": "postgres",
         "operatorsAliases": false,
-        "logging": true
+        "logging": true,
+        "force": true
     },
     "test": {
         "username": "example_user",
         "password": "examplesecreta",
-        "database": "example_testing",
+        "database": "example",
         "host": "127.0.0.1",
         "dialect": "postgres",
         "operatorsAliases": false,
-        "logging": false
+        "logging": false,
+        "force": true
     },
     "production": {
         "use_env_variable": "DATABASE_URL",
         "dialect": "postgres",
-        "operatorsAliases": false
+        "operatorsAliases": false,
+        "force": false,
+        "logging": false
     }
 }

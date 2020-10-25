@@ -20,6 +20,19 @@ jobs:
         steps:
             # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
             - uses: actions/checkout@v2
+            - name: Use Node.js
+              uses: actions/setup-node@v1
+
+            # Required for testing
+            - name: Install backend
+              run: cd backend && npm install
+
+            # CI
+            - name: Run tests
+              run: cd backend && npm test
+              env:
+                  NODE_ENV: test
+                  USE_ENV_VARIABLE: secrets.TESTING_DATABASE
 
             # Runs a single command using the runners shell
             - name: Add heroku remote origin

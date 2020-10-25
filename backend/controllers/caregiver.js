@@ -108,7 +108,7 @@ caregiver.addPatient = (req, res, next) => {
 };
 
 caregiver.removePatient = (req, res, next) => {
-    Model.caregiver
+    Model.caregivers
         .findOne({
             where: {
                 id: req.body.caregiverId,

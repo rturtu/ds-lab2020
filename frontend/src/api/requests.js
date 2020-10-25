@@ -1,22 +1,19 @@
-import {request} from "./request.js";
+import { request } from "./request.js";
 //import {axiosRequest} from "./request.js";
 //import axios from 'axios';
 
-// At which endpoint the api is located
-// we will use this for the example getting mock data
-// For development this will usually be localhost
-const url = 'https://jsonplaceholder.typicode.com/';
+const url = "http://localhost:9000/";
 
-export const getProducts = () => {return request( url + 'albums/' , {method:'GET'})};
+const api = {
+    doctor: {
+        signUp: (payload) =>
+            request(`${url}doctor/signup`, { method: "POST", body: payload }),
+        logIn: (payload) =>
+            request(`${url}doctor/login`, { method: "POST", body: payload }),
+    },
+};
 
-// not used in example
-// payload will be a product identifier object, something like
-// {
-//  id: 123
-// }
-export const addProduct = (payload) => {return request(url + 'albums/', {method:"POST", body:JSON.stringify(payload)})};
-export const deleteProduct = (payload) => {return request(url+'albums/', {method:"DELETE", body:JSON.stringify(payload)})};
-export const login = (payload) => {return request( url + 'login/' ,{body:JSON.stringify( payload )}) };
+export default api;
 
 ///FILES
 // this is going to be used only with files

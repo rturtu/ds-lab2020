@@ -18,10 +18,7 @@
         "logging": false
     },
     "production": {
-        "username": "example_user",
-        "password": "examplesecreta",
-        "database": "example",
-        "host": "127.0.0.1",
+        "use_env_variable": "DATABASE_URL",
         "dialect": "postgres",
         "operatorsAliases": false
     }

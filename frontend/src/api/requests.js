@@ -2,7 +2,7 @@ import { request } from "./request.js";
 //import {axiosRequest} from "./request.js";
 //import axios from 'axios';
 
-const url = "http://localhost:9000/";
+const url = process.env.REACT_APP_API_URL || "http://localhost:9000/";
 
 const api = {
     doctor: {

@@ -20,6 +20,7 @@ const DoctorLogIn = (props) => {
             })
             .then((res) => {
                 sessionStorage.setItem("authToken", res.token);
+                console.log("gataaa");
                 history.push("/doctor/dashboard");
             })
             .catch((err) => {

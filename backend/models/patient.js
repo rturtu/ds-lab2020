@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
         },
         birthDate: {
-            type: DataTypes.BIGINT,
+            type: DataTypes.DATE,
             allowNull: false,
         },
         gender: {
@@ -23,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     Patient.associate = (models) => {
+        models.patients.hasMany(models.medications);
         models.patients.belongsToMany(models.caregivers, {
             through: "patientCaregivers",
             onDelete: "cascade",

@@ -1,5 +1,6 @@
 import React from "react";
 import "./App.css";
+import "semantic-ui-css/semantic.min.css";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import DoctorSignUp from "./views/doctor/signup";

@@ -10,11 +10,12 @@ doctor.login = (req, res, next) => {
             },
         })
         .then((result) => {
+            console.log(result);
             if (result && result.validPassword(req.body.password)) {
                 const token = result.generateToken();
                 res.status(200).send({ token });
             } else {
-                res.sendStatus(401);
+                res.sendStatus(400);
             }
         })
         .catch((err) => {

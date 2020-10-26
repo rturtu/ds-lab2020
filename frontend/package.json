@@ -3,7 +3,6 @@
     "version": "0.1.0",
     "private": true,
     "dependencies": {
-        "cypress": "^5.4.0",
         "react": "^16.14.0",
         "react-dom": "^16.14.0",
         "react-reflux": "^1.2.2",
@@ -17,18 +16,25 @@
     "scripts": {
         "start": "react-scripts start",
         "build": "react-scripts build",
-        "test": "npm start; ./node_modules/.bin/cypress run",
+        "test": "./node_modules/.bin/cypress run",
         "eject": "react-scripts eject"
     },
     "eslintConfig": {
         "extends": "react-app"
     },
     "browserslist": {
-        "production": [">0.2%", "not dead", "not op_mini all"],
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
         "development": [
             "last 1 chrome version",
             "last 1 firefox version",
             "last 1 safari version"
         ]
+    },
+    "devDependencies": {
+        "cypress": "^5.4.0"
     }
 }

@@ -10,8 +10,8 @@
         "force": true
     },
     "test": {
-        "use_env_variable": "DATABASE_URL",
-        "dialect": "postgres",
+        "dialect": "sqlite",
+        "storage": "data/test-db.sqlite3",
         "operatorsAliases": false,
         "logging": false,
         "force": true

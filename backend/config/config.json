@@ -7,7 +7,7 @@
         "dialect": "postgres",
         "operatorsAliases": false,
         "logging": true,
-        "force": true
+        "force": false
     },
     "test": {
         "dialect": "sqlite",

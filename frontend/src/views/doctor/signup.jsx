@@ -32,6 +32,7 @@ const DoctorLogIn = (props) => {
                 <h3>Username</h3>
                 <Form.Input
                     placeholder="username"
+                    type="text"
                     value={username}
                     onChange={(evt) => setUsername(evt.target.value)}
                 />
@@ -43,6 +44,7 @@ const DoctorLogIn = (props) => {
                     onChange={(evt) => setPassword(evt.target.value)}
                 />
                 <Button
+                    className="doctor-signup-button"
                     onClick={(evt) => {
                         evt.stopPropagation();
                         handleLogIn();

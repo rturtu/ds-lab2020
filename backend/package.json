@@ -24,7 +24,7 @@
         "mocha": "^6.2.2"
     },
     "scripts": {
-        "test": "NODE_ENV=test mocha testing.js --timeout 10 --exit",
+        "test": "NODE_ENV=test mocha testing.js --timeout 10000 --exit",
         "start": "node ./bin/www"
     },
     "repository": {

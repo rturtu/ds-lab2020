@@ -32,7 +32,7 @@ jobs:
               run: cd backend && npm test
               env:
                   NODE_ENV: test
-                  USE_ENV_VARIABLE: secrets.TESTING_DATABASE
+                  DATABASE_URL: secrets.TESTING_DATABASE
 
             # Runs a single command using the runners shell
             - name: Add heroku remote origin

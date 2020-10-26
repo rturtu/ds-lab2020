@@ -24,8 +24,8 @@ jobs:
 
 
               # Required for testing
-            - name: Install frontend
-              run: cd frontend && npm install
+            - name: Install and run frontend
+              run: cd frontend && npm install && npm start
 
 
               # CI

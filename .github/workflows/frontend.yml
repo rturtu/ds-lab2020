@@ -19,18 +19,16 @@ jobs:
             # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
             - uses: actions/checkout@v2
 
+            - name: Chrome
+              uses: cypress-io/github-action@v1
+              timeout-minutes: 10
+              with:
+                  build: npm run build
+                  start: npm start
+                  browser: chrome
+
             - name: Use Node.js
               uses: actions/setup-node@v1
-
-            - name: Install dependency
-              run: cd frontend && npm install -g wait-on
-
-
-              # Required for end to end testing
-            - name: Install and run frontend and test
-              run: cd frontend && npm install && npm start & wait-on http://localhost:3000 && npm test
-              env:
-                  REACT_APP_API_URL: https://dslab2020-back.herokuapp.com/
 
             # Runs a single command using the runners shell
             - name: Add heroku remote origin

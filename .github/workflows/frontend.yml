@@ -22,6 +22,9 @@ jobs:
             - name: Use Node.js
               uses: actions/setup-node@v1
 
+            - name: Install dependency
+              run: cd frontend && npm install -g wait-on
+
 
               # Required for end to end testing
             - name: Install and run frontend and test

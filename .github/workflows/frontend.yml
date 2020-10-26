@@ -28,12 +28,7 @@ jobs:
 
               # Required for end to end testing
             - name: Install and run frontend and test
-              run: cd frontend && npm install && npm start & wait-on http://localhost:3000
-
-
-              # CI
-            - name: End to end testign
-              run: cd frontend && npm test
+              run: cd frontend && npm install && npm start & wait-on http://localhost:3000 && npm test
               env:
                   REACT_APP_API_URL: https://dslab2020-back.herokuapp.com/
 

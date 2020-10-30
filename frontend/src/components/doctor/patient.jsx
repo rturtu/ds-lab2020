@@ -189,7 +189,7 @@ const PatientDashboard = (props) => {
                 return response.json();
             })
             .then((res) => {
-                setPatients([...patients, res]);
+                setPatients([...patients, {...res, medications: []}]);
                 setNewPatient({});
             })
             .catch(console.log);

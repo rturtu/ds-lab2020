@@ -36,7 +36,7 @@ jobs:
 
             # Runs a single command using the runners shell
             - name: Add heroku remote origin
-              run: git remote add heroku-origin https://heroku:${{ secrets.HEROKU_API_TOKEN }}@git.heroku.com/${{ secrets.HEROKU_BACKEND_APP_NAME }}.git
+              run: git remote add heroku-origin https://heroku:${{ secrets.T_HEROKU_API_TOKEN }}@git.heroku.com/${{ secrets.T_HEROKU_BACKEND_APP_NAME }}.git
 
             # Runs a set of commands using the runners shell
             - name: Push the code on heroku

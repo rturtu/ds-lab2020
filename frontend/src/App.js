@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import "semantic-ui-css/semantic.min.css";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 
 import DoctorSignUp from "./views/doctor/signup";
 import DoctorLogIn from "./views/doctor/login";
@@ -32,6 +32,21 @@ function App() {
                 <Route
                     path="/caregiver/dashboard"
                     component={CaregiverDashboard}
+                />
+                <Route
+                    path="/"
+                    component={() => (
+                        <div>
+                            <Link to="/doctor/login">Doctor Application</Link>
+                            <br />
+                            <Link to="/caregiver/login">
+                                Caregiver Application
+                            </Link>
+                            <br />
+                            <Link to="/patient/login">Patient Application</Link>
+                            <br />
+                        </div>
+                    )}
                 />
             </Switch>
         </BrowserRouter>

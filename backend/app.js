@@ -63,11 +63,8 @@ rabbit((connection) => {
         channel.consume("activities", (msg) => {
             if (msg !== null) {
                 let content = JSON.parse(msg.content.toString());
-                console.log("GOT MSG: ", content);
-
                 let startDate = new Date(content.start);
                 let endDate = new Date(content.end);
-
                 if (content.activity === "Sleeping") {
                     if (
                         endDate.valueOf() - startDate.valueOf() >

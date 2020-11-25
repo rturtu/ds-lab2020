@@ -1,16 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PatientDashboard from "../../components/doctor/patient";
 import { Menu } from "semantic-ui-react";
 import api from "../../api/requests";
+import io from "socket.io-client";
 
 const DoctorDashboard = (props) => {
     const [currentTab, setCurrentTab] = useState("patients");
+    const [alerts, setAlerts] = useState([]);
     const tabs = [
         {
             key: "patients",
             name: "Patients",
         },
     ];
+
+    useEffect(() => {
+        const url = process.env.REACT_APP_API_URL || "http://localhost:9000/";
+        const socket = io(url, {
+            enabledTransports: ["ws", "wss"],
+            transports: ["websocket"],
+        });
+        socket.on("alert", (data) => {
+            setAlerts((oldAlerts) => [...oldAlerts, data]);
+            //NotificationManager.success(data, "", 1000);
+        });
+    }, []);
+
+    console.log(alerts);
+
     return (
         <React.Fragment>
             <Menu

@@ -16,28 +16,28 @@ const config = require(__dirname + '/../config/config.json')[env];
  */
 
 var port = normalizePort(process.env.PORT || '9000');
-app.set('port', port);
+//app.set('port', port);
 
 /**
  * Create HTTP server.
  */
 
-var server = http.createServer(app);
+//var server = http.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.
  */
 
 Model.sequelize.sync({ logging: config.logging, force: config.force }).then(function() {
-     server.listen(port, function() {
+  /*   server.listen(port, function() {
          console.log('SERVER STARTED EMIT');
          server.emit('serverStarted');
-     });
+     });*/
  }); 
 
 
-server.on('error', onError);
-server.on('listening', onListening);
+//server.on('error', onError);
+//server.on('listening', onListening);
 
 /**
  * Normalize a port into a number, string, or false.

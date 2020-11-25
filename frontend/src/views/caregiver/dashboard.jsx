@@ -3,10 +3,10 @@ import PatientDashboard from "../../components/doctor/patient";
 import { Menu } from "semantic-ui-react";
 import api from "../../api/requests";
 import io from "socket.io-client";
+import { toast } from "react-toastify";
 
 const DoctorDashboard = (props) => {
     const [currentTab, setCurrentTab] = useState("patients");
-    const [alerts, setAlerts] = useState([]);
     const tabs = [
         {
             key: "patients",
@@ -21,8 +21,7 @@ const DoctorDashboard = (props) => {
             transports: ["websocket"],
         });
         socket.on("alert", (data) => {
-            setAlerts((oldAlerts) => [...oldAlerts, data]);
-            //NotificationManager.success(data, "", 1000);
+            toast(data);
         });
     }, []);
 

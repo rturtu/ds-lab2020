@@ -15,6 +15,9 @@ import CaregiverSignUp from "./views/caregiver/signup";
 import CaregiverLogIn from "./views/caregiver/login";
 import CaregiverDashboard from "./views/caregiver/dashboard";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function App() {
     return (
         <BrowserRouter>
@@ -49,6 +52,7 @@ function App() {
                     )}
                 />
             </Switch>
+            <ToastContainer />
         </BrowserRouter>
     );
 }

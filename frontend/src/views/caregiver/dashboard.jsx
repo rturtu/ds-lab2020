@@ -25,8 +25,6 @@ const DoctorDashboard = (props) => {
         });
     }, []);
 
-    console.log(alerts);
-
     return (
         <React.Fragment>
             <Menu

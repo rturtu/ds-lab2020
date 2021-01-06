@@ -21,18 +21,23 @@ import grpc
 import helloworld_pb2
 import helloworld_pb2_grpc
 import datetime
+import urllib.request, json
 
 def getIntakeTime(secondsDelta):
     return int(1000000 * datetime.datetime.timestamp(datetime.datetime.now() + datetime.timedelta(seconds=secondsDelta)))
 
 def getMeds():
-    return [
-        helloworld_pb2.Medication(id=1,name= 'Paracetamol',intakeTime= getIntakeTime(2)),
-        helloworld_pb2.Medication(id=2,name= 'Augmentin',intakeTime= getIntakeTime(5)),
-        #helloworld_pb2.Medication(id=3,name= 'Spirt',intakeTime= getIntakeTime(20)),
-        #helloworld_pb2.Medication(id=4,name= 'Aspirina',intakeTime= getIntakeTime(30)),
-        #helloworld_pb2.Medication(id=5,name= 'Ibuprofen',intakeTime= getIntakeTime(60)),
-        ]
+
+      url = "https://dslab2020-back.herokuapp.com/medication-dispenser/2"
+      response = urllib.request.urlopen(url)
+      data = json.loads(response.read())
+
+      meds = []
+      i = 2
+      for med in data:
+          meds.append( helloworld_pb2.Medication(id=med["id"], name=med["name"], intakeTime=getIntakeTime(i)) )
+          i = i + 2
+      return meds
 
 class MedApplication(helloworld_pb2_grpc.MedApplicationServicer):
 

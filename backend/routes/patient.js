@@ -14,6 +14,11 @@ router.put(
     Controller.patient.update
 );
 
+router.get(
+    "/medication-dispenser/:patientId",
+    Controller.patient.getMedicationDispenser
+);
+
 router.put(
     "/doctor/patient/:patientId",
     Middleware.doctor.isLogged,

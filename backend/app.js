@@ -42,7 +42,7 @@ const io = require("socket.io")(server, {
     },
 });
 
-server.listen(process.env.PORT);
+server.listen(process.env.PORT || 9000);
 
 io.on("connection", (socket) => {
     console.log("An user has connected.");

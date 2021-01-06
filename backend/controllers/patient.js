@@ -35,6 +35,26 @@ patient.getAll = (req, res, next) => {
         });
 };
 
+patient.getMedicationDispenser = (req, res, next) => {
+    Model.patients
+        .findOne({
+            where: {
+                id: req.params.patientId,
+            },
+            include: [
+                {
+                    model: Model.medications,
+                },
+            ],
+        })
+        .then((result) => {
+            res.status(200).send(result.medications);
+        })
+        .catch((err) => {
+            next(err);
+        });
+};
+
 patient.getFromCaregiver = (req, res, next) => {
     req.caregiver
         .getPatients({
